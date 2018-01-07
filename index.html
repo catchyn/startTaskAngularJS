@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-Edge">
+    <meta name="viewport" content="width-device-width, initial-scale-1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.7/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+
+    <style>
+        .container {
+            padding-top: 10px;
+        }
+        .main-list {
+            border-style: solid;
+            border-width: 3px;
+        }
+    </style>
+</head>
+<body ng-app="app" ng-controller="MainCtrl">
+    <div ng-class="{'container': true}">
+        <div ng-class="{'page-header': true}">
+            <h1>Тестовое задание</h1>
+        </div>
+        <h2>Список продуктов</h2>
+        <div>
+            <todo-list dir-items="items"></todo-list>
+        </div>
+    </div>
+</body>
+</html>
