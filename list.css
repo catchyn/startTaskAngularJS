@@ -1,0 +1,48 @@
+.h4-afterCb {
+    margin: 0 0 0 10px ;
+    font-size: 18px;
+}
+
+.list-group-item-info {
+    cursor: pointer;
+}
+
+.list-elem-text {
+    font-weight: 500!important;
+}
+
+.list-group-item label {
+    margin: 0;
+    cursor: pointer;
+}
+
+.list-group-item input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.wrap-title h4 {
+    margin: 0;
+    padding: 10px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.wrap-title .btn-group {
+    text-align: right;
+}
+
+.wrap-title {
+    border-radius: .25em .25em .0em .0em;
+}
+
+.init .wrap-title {
+    background-color: #337ab7;
+}
+
+.result .wrap-title {
+    background-color: #5cb85c;
+}
