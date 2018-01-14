@@ -21,7 +21,7 @@
 }
 
 .wrap-title h4 {
-    margin: 0;
+    margin: 0 34px 0 0;
     padding: 10px;
     font-weight: 700;
     line-height: 1;
@@ -29,6 +29,8 @@
     text-align: left;
     white-space: nowrap;
     vertical-align: baseline;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .wrap-title .btn-group {
@@ -41,8 +43,19 @@
 
 .init .wrap-title {
     background-color: #337ab7;
+    position: relative;
 }
 
 .result .wrap-title {
     background-color: #5cb85c;
+}
+
+.wrap-title .btn-group {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.wrap-title .btn-group .btn {
+    padding: 8px 12px;
 }

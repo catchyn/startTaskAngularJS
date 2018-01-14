@@ -1,5 +1,5 @@
 <div ng-class="{'row':true}">
-    <div ng-class="{'col-md-3 no-margin':true, 'init': true}">
+    <div ng-class="{'col-md-4': true, 'init': true}">
         <!--<div>-->
                 <!--<span  class="nullable">-->
                     <!--<select ng-model="showMSelect" ng-options="color.name for color in colors">-->
@@ -10,18 +10,18 @@
         <!--</div>-->
         <div ng-class="{'wrap-title':true}">
             <h4>
-                Нужно купить
-                <div class="btn-group" ng-class='{open: open}'>
-                    <button ng-class="{'btn btn-primary dropdown-toggle': true}" data-toggle="dropdown" ng-click='open=!open'>
-                        <span ng-class="{'caret':true}"></span>
-                    </button>
-                    <ul ng-class="{'dropdown-menu':true}">
-                        <li><a href="#">Отметить несколько</a></li>
-                        <li><a href="#">Отметить все</a></li>
-                        <li><a href="#">Снять со всех</a></li>
-                    </ul>
-                </div>
+                Нужно купить dddddaaaaaaaaaaddffffgfgfgf
             </h4>
+            <div ng-class="{open: open, 'btn-group': true}"  ng-click='open=!open'>
+                <button ng-class="{'btn btn-primary dropdown-toggle': true}" data-toggle="dropdown">
+                    <span ng-class="{'caret':true}"></span>
+                </button>
+                <ul ng-class="{'dropdown-menu':true}">
+                    <li><a href="#">Отметить несколько</a></li>
+                    <li><a href="#">Отметить все</a></li>
+                    <li><a href="#">Снять со всех</a></li>
+                </ul>
+            </div>
         </div>
         <ul ng-class="{'list-group':true}">
             <li ng-repeat="item in initItems" ng-class="{'list-group-item-info': $index === initIdx, 'list-group-item':true}">
@@ -34,11 +34,11 @@
             </li>
         </ul>
     </div>
-    <div ng-class="{'col-md-3 no-margin':true, 'result': true}">
+    <div ng-class="{'col-md-4': true, 'result':true}">
         <div ng-class="{'wrap-title':true}">
             <h4>
                 Куплено
-                <div class="btn-group" ng-class='{open: open2}'>
+                <div class="btn-group" ng-class='{open: open2}'  ng-click='open=!open'>
                     <button ng-class="{'btn btn-success dropdown-toggle': true}" data-toggle="dropdown" ng-click='open2=!open2'>
                         <span ng-class="{'caret':true}"></span>
                     </button>
@@ -51,9 +51,9 @@
             </h4>
         </div>
         <ul ng-class="{'list-group':true}">
-            <li ng-repeat="item in resultItems" ng-class="{'list-group-item':true}">
-                <div ng-mouseenter="onMouseenter($index, 'result')" ng-mouseleave="onMouseleave()" ng-class="{'row-list':true, 'bg-info': $index === resultIdx}">
-                    <label>
+            <li ng-repeat="item in resultItems" ng-class="{'list-group-item-info': $index === initIdx, 'list-group-item':true}">
+                <div ng-mouseenter="onMouseenter($index, 'result')" ng-mouseleave="onMouseleave()" ng-class="{'row-list':true}">
+                    <label ng-click="checkedItem('result', $index)">
                         <input type="checkbox">
                         <span ng-class="{'list-elem-text': true}">{{item}}</span>
                     </label>
