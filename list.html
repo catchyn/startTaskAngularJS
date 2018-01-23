@@ -10,51 +10,54 @@
         <!--</div>-->
         <div ng-class="{'wrap-title':true}">
             <h4>
-                Нужно купить dddddaaaaaaaaaaddffffgfgfgf
+                {{initTitle}}
             </h4>
-            <div ng-class="{open: open, 'btn-group': true}"  ng-click='open=!open'>
+            <div ng-if="multiSelect == 'true'" ng-class="{open: open, 'btn-group': true}"  ng-click='open=!open'>
                 <button ng-class="{'btn btn-primary dropdown-toggle': true}" data-toggle="dropdown">
                     <span ng-class="{'caret':true}"></span>
                 </button>
-                <ul ng-class="{'dropdown-menu':true}">
-                    <li><a href="#">Отметить несколько</a></li>
-                    <li><a href="#">Отметить все</a></li>
-                    <li><a href="#">Снять со всех</a></li>
+                <ul id="init_dm" ng-class="{'dropdown-menu':true}">
+                    <li><a href="#init_dm" ng-click="checkFewItems('init')">{{initCbShow == true ? "Скрыть отметки" : "Отметить несколько"}}</a></li>
+                    <li ng-if="initCbShow == true"><a href="#init_dm" ng-click="checkAllItems('init')">Отметить все</a></li>
+                    <li ng-if="initCbShow == true"><a href="#init_dm" ng-click="unCheckAllItems('init')">Снять со всех</a></li>
                 </ul>
             </div>
         </div>
         <ul ng-class="{'list-group':true}">
-            <li ng-repeat="item in initItems" ng-class="{'list-group-item-info': $index === initIdx, 'list-group-item':true}">
-                <div ng-mouseenter="onMouseenter($index, 'init')" ng-mouseleave="onMouseleave()" ng-class="{'row-list':true}" ng-click="checkedItem('init', $index)">
-                    <label ng-click="checkedItem('init', $index)">
-                        <input type="checkbox">
-                        <span ng-class="{'list-elem-text': true}">{{item}}</span>
-                    </label>
-                </div>
-            </li>
+            <div>
+                <li ng-repeat="item in initItems" ng-class="{'list-group-item-info': $index === initIdx, 'list-group-item':true}">
+                    <div draggable="true" ng-mouseenter="onMouseenter($index, 'init')" ng-mouseleave="onMouseleave()" ng-class="{'row-list':true}" ng-click="checkedItem('init', $index)">
+                        <label ng-click="checkedItem('init', $index)">
+                            <input ng-if="initCbShow" type="checkbox">
+                            <span ng-class="{'list-elem-text': true}">{{item}}</span>
+                        </label>
+                    </div>
+                </li>
+            </div>
         </ul>
     </div>
     <div ng-class="{'col-md-4': true, 'result':true}">
         <div ng-class="{'wrap-title':true}">
             <h4>
-                Куплено
-                <div class="btn-group" ng-class='{open: open2}'  ng-click='open=!open'>
-                    <button ng-class="{'btn btn-success dropdown-toggle': true}" data-toggle="dropdown" ng-click='open2=!open2'>
-                        <span ng-class="{'caret':true}"></span>
-                    </button>
-                    <ul ng-class="{'dropdown-menu':true}">
-                        <li><a href="#">Отметить несколько</a></li>
-                        <li><a href="#">Отметить все</a></li>
-                        <li><a href="#">Снять со всех</a></li>
-                    </ul>
-                </div>
+                {{resultTitle}}
+            </h4>
+            <div ng-if="multiSelect == 'true'" ng-class="{open: open2, 'btn-group': true}" ng-click='open2=!open2'>
+                <button ng-class="{'btn btn-success dropdown-toggle': true}" data-toggle="dropdown">
+                    <span ng-class="{'caret':true}"></span>
+                </button>
+                <ul id="result_dm" ng-class="{'dropdown-menu':true}">
+                    <li><a href="#result_dm" ng-click="checkFewItems('result')">{{resultCbShow == true ? "Скрыть отметки" : "Отметить несколько"}}</a></li>
+                    <li ng-if="resultCbShow == true"><a href="#result_dm" ng-click="checkAllItems('result')">Отметить все</a></li>
+                    <li ng-if="resultCbShow == true"><a href="#result_dm" ng-click="unCheckAllItems('result')">Снять со всех</a></li>
+                </ul>
+            </div>
             </h4>
         </div>
         <ul ng-class="{'list-group':true}">
-            <li ng-repeat="item in resultItems" ng-class="{'list-group-item-info': $index === initIdx, 'list-group-item':true}">
-                <div ng-mouseenter="onMouseenter($index, 'result')" ng-mouseleave="onMouseleave()" ng-class="{'row-list':true}">
+            <li ng-repeat="item in resultItems" ng-class="{'list-group-item-info': $index === resultIdx, 'list-group-item':true}">
+                <div draggable="true" ng-mouseenter="onMouseenter($index, 'result')" ng-mouseleave="onMouseleave()" ng-class="{'row-list':true}" ng-click="checkedItem('result', $index)">
                     <label ng-click="checkedItem('result', $index)">
-                        <input type="checkbox">
+                        <input ng-if="resultCbShow" type="checkbox">
                         <span ng-class="{'list-elem-text': true}">{{item}}</span>
                     </label>
                 </div>
@@ -64,6 +67,6 @@
 </div>
 <div ng-class="{'row':true}">
     <div ng-class="{'col-md-3':true}">
-        <input type="submit" ng-class="{'btn btn-danger': true}" value="Выполнить" ng-click="sendCheckedItems('init','result');sendCheckedItems('result','init')">
+        <input type="submit" ng-if="resultCbShow || initCbShow" ng-class="{'btn btn-danger': true}" value="Выполнить" ng-click="sendCheckedItems('init','result');sendCheckedItems('result','init')">
     </div>
 </div>
