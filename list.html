@@ -23,18 +23,23 @@
                 </ul>
             </div>
         </div>
-        <ul ng-class="{'list-group':true}">
-            <div>
-                <li ng-repeat="item in initItems" ng-class="{'list-group-item-info': $index === initIdx, 'list-group-item':true}">
-                    <div draggable="true" ng-mouseenter="onMouseenter($index, 'init')" ng-mouseleave="onMouseleave()" ng-class="{'row-list':true}" ng-click="checkedItem('init', $index)">
+        <div ng-class="{'wrap-list-group':true}">
+            <ul ng-class="{'list-group':true, 'list-group-item-empty': initItems.length == 0}" dnd-list="initItems">
+                <li ng-repeat="item in initItems"
+                    dnd-draggable="item"
+                    dnd-moved="deleteElement('init', $index)"
+                    dnd-effect-allowed="move"
+                    dnd-selected="models.selected = item"
+                    ng-class="{'list-group-item-info': $index === initIdx, 'list-group-item':true, 'selected': models.selected === item}">
+                    <div ng-mouseenter="onMouseenter($index, 'init')" ng-mouseleave="onMouseleave()" ng-class="{'row-list':true}" ng-click="checkedItem('init', $index)">
                         <label ng-click="checkedItem('init', $index)">
                             <input ng-if="initCbShow" type="checkbox">
-                            <span ng-class="{'list-elem-text': true}">{{item}}</span>
+                            <span ng-class="{'list-elem-text': true}">{{item['item']}}</span>
                         </label>
                     </div>
                 </li>
-            </div>
-        </ul>
+            </ul>
+        </div>
     </div>
     <div ng-class="{'col-md-4': true, 'result':true}">
         <div ng-class="{'wrap-title':true}">
@@ -51,18 +56,24 @@
                     <li ng-if="resultCbShow == true"><a href="#result_dm" ng-click="unCheckAllItems('result')">Снять со всех</a></li>
                 </ul>
             </div>
-            </h4>
         </div>
-        <ul ng-class="{'list-group':true}">
-            <li ng-repeat="item in resultItems" ng-class="{'list-group-item-info': $index === resultIdx, 'list-group-item':true}">
-                <div draggable="true" ng-mouseenter="onMouseenter($index, 'result')" ng-mouseleave="onMouseleave()" ng-class="{'row-list':true}" ng-click="checkedItem('result', $index)">
-                    <label ng-click="checkedItem('result', $index)">
-                        <input ng-if="resultCbShow" type="checkbox">
-                        <span ng-class="{'list-elem-text': true}">{{item}}</span>
-                    </label>
-                </div>
-            </li>
-        </ul>
+        <div ng-class="{'wrap-list-group':true}">
+            <ul ng-class="{'list-group':true, 'list-group-item-empty': resultItems.length == 0}" dnd-list="resultItems">
+                <li ng-repeat="item in resultItems"
+                    dnd-draggable="item"
+                    dnd-moved="deleteElement('result', $index)"
+                    dnd-effect-allowed="move"
+                    dnd-selected="models.selected = item"
+                    ng-class="{'list-group-item-info': $index === resultIdx, 'list-group-item':true, 'selected': models.selected === item}">
+                    <div ng-mouseenter="onMouseenter($index, 'result')" ng-mouseleave="onMouseleave()" ng-class="{'row-list':true}" ng-click="checkedItem('result', $index)">
+                        <label ng-click="checkedItem('result', $index)">
+                            <input ng-if="resultCbShow" type="checkbox">
+                            <span ng-class="{'list-elem-text': true}">{{item['item']}}</span>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 <div ng-class="{'row':true}">
