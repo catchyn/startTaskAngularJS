@@ -3,23 +3,6 @@
     font-size: 18px;
 }
 
-.list-group-item-info {
-    cursor: pointer;
-}
-
-.list-elem-text {
-    font-weight: 500!important;
-}
-
-.list-group-item label {
-    margin: 0;
-    cursor: pointer;
-}
-
-.list-group-item input[type="checkbox"] {
-    cursor: pointer;
-}
-
 /*.list-group-item .row-list {*/
     /*cursor: move;*/
 /*}*/
@@ -67,12 +50,50 @@
     border-radius: 0 4px 4px 0;
 }
 
-[draggable] {
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    /* Required to make elements draggable in old WebKit */
-    -khtml-user-drag: element;
-    -webkit-user-drag: element;
+/*.wrap-list-group .list-group{*/
+    /*min-height: 42px;*/
+    /*border: 1px;*/
+/*}*/
+
+.wrap-list-group .list-group-item-info {
+    cursor: pointer;
 }
+
+.wrap-list-group .list-group {
+
+}
+
+.wrap-list-group .list-elem-text {
+    font-weight: 500!important;
+}
+
+.wrap-list-group .list-group-item label {
+    margin: 0;
+    cursor: pointer;
+}
+
+.wrap-list-group .list-group-item-empty {
+    border-radius: .25em .25em .25em .25em;
+    min-height: 42px;
+    border: 1px solid #ddd;
+}
+
+.wrap-list-group .list-group-item input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.wrap-list-group ul[dnd-list] .dndPlaceholder {
+    background-color: #ddd;
+    border-radius: .25em .25em .25em .25em;
+    display: block;
+    min-height: 42px;
+}
+/*[draggable] {*/
+    /*-moz-user-select: none;*/
+    /*-khtml-user-select: none;*/
+    /*-webkit-user-select: none;*/
+    /*user-select: none;*/
+    /*!* Required to make elements draggable in old WebKit *!*/
+    /*-khtml-user-drag: element;*/
+    /*-webkit-user-drag: element;*/
+/*}*/

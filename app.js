@@ -1,4 +1,4 @@
-var app = angular.module('app', []);
+var app = angular.module('app', ['dndLists']);
 
 app.controller('MainCtrl', ['$scope', function ($scope) {
     $scope.items = ['Батон', 'Кефир', 'Столярный клей', 'Молоко','Автоматввввввввв ввввввввввввввввв'];
@@ -22,9 +22,19 @@ app.directive('todoList', [function(){
            scope.resultCbShow = false;
            scope.resultItems = [];
 
-           scope.btnClick = function() {
-               scope.bindAttr = 'new Value from directive'
+           var formObj = function(list) {
+              var resList = [];
+              for (var i = 0; i < list.length; i++ ) {
+                  var obj = {};
+                  obj["label"] = "elem" + i;
+                  obj["item"] = list[i];
+                  resList.push(obj);
+              }
+              return resList;
            };
+
+           scope.initItems   = formObj(scope.initItems);
+           scope.resultItems = formObj(scope.resultItems);
 
            //Highlight on mouse
            scope.onMouseenter = function(idx, typeList){
@@ -55,13 +65,13 @@ app.directive('todoList', [function(){
                        angular.element(item.querySelectorAll('input'))[0].type == "checkbox" && angular.element(item.querySelectorAll('input'))[0].checked == true) {
                            var itemText = angular.element(item.querySelectorAll(".list-elem-text"))[0].textContent;
 
-                           scope[inTypeList + 'Items'] = scope[inTypeList + 'Items'] || [];
-                           if (scope[inTypeList + 'Items'].indexOf(itemText) != -1) {
-                               scope[inTypeList + 'Items'].splice(scope[inTypeList + 'Items'].indexOf(itemText), 1);
+                           scope[inTypeList + 'Items']["item"] = scope[inTypeList + 'Items']["item"] || [];
+                           if (scope[inTypeList + 'Items']["item"].indexOf(itemText) != -1) {
+                               scope[inTypeList + 'Items']["item"].splice(scope[inTypeList + 'Items']["item"].indexOf(itemText), 1);
                            }
 
-                           scope[toTypeList + 'Items'] = scope[toTypeList + 'Items'] || [];
-                           scope[toTypeList + 'Items'].push(itemText);
+                           scope[toTypeList + 'Items']["item"] = scope[toTypeList + 'Items']["item"] || [];
+                           scope[toTypeList + 'Items']["item"].push(itemText);
                    }
                }
            };
@@ -83,6 +93,22 @@ app.directive('todoList', [function(){
                    scope.checkedItem(typeList, i, false);
                }
            };
+
+           scope.models = {
+               selected: null,
+               lists: {
+                   'init': scope.initItems,
+                   'result': scope.resultItems
+               }
+           };
+
+           scope.deleteElement = function(typeList, idx){
+               scope.models.lists[typeList].splice(idx, 1);
+           };
+
+            scope.$watch('models', function (model) {
+                scope.modelAsJson = angular.toJson(model, true);
+            }, true);
         }
     }
 }]);
