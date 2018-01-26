@@ -34,7 +34,7 @@
                     <div ng-mouseenter="onMouseenter($index, 'init')" ng-mouseleave="onMouseleave()" ng-class="{'row-list':true}" ng-click="checkedItem('init', $index)">
                         <label ng-click="checkedItem('init', $index)">
                             <input ng-if="initCbShow" type="checkbox">
-                            <span ng-class="{'list-elem-text': true}">{{item['item']}}</span>
+                            <span ng-class="{'list-elem-text': true}">{{item[initText]}}</span>
                         </label>
                     </div>
                 </li>
@@ -68,7 +68,7 @@
                     <div ng-mouseenter="onMouseenter($index, 'result')" ng-mouseleave="onMouseleave()" ng-class="{'row-list':true}" ng-click="checkedItem('result', $index)">
                         <label ng-click="checkedItem('result', $index)">
                             <input ng-if="resultCbShow" type="checkbox">
-                            <span ng-class="{'list-elem-text': true}">{{item['item']}}</span>
+                            <span ng-class="{'list-elem-text': true}">{{item[initText]}}</span>
                         </label>
                     </div>
                 </li>

@@ -1,7 +1,33 @@
 var app = angular.module('app', ['dndLists']);
 
 app.controller('MainCtrl', ['$scope', function ($scope) {
-    $scope.items = ['Батон', 'Кефир', 'Столярный клей', 'Молоко','Автоматввввввввв ввввввввввввввввв'];
+    $scope.items = [
+        {
+            text: 'Батон',
+            num: 2,
+            sysname: 'bread'
+        },
+        {
+            text: 'Кефир',
+            num: 1,
+            sysname: 'chefir'
+        },
+        {
+            text: 'Яблоко',
+            num: 1,
+            sysname: 'Apple'
+        },
+        {
+            text: 'Молоко',
+            num: 2,
+            sysname: 'milk'
+        },
+        {
+            text: 'Очень длинное название очень длинное название чень длинное название',
+            num: 1,
+            sysname: 'long'
+        }
+    ];
 }]);
 
 app.directive('todoList', [function(){
@@ -10,6 +36,8 @@ app.directive('todoList', [function(){
         scope: {
             initItems: '=',
             initTitle: '@',
+            initValue: '@',
+            initText: '@',
             resultTitle: '@',
             multiSelect: '@'
         },
@@ -22,12 +50,12 @@ app.directive('todoList', [function(){
            scope.resultCbShow = false;
            scope.resultItems = [];
 
+           //TODO: Сделать проверку на тип данных
            var formObj = function(list) {
               var resList = [];
               for (var i = 0; i < list.length; i++ ) {
-                  var obj = {};
-                  obj["label"] = "elem" + i;
-                  obj["item"] = list[i];
+                  var obj = list[i];
+                  obj["label"] = obj[scope.initValue];
                   resList.push(obj);
               }
               return resList;
@@ -59,19 +87,14 @@ app.directive('todoList', [function(){
 
            scope.sendCheckedItems = function(inTypeList, toTypeList) {
                var items = angular.element(document.querySelectorAll('.' + inTypeList + ' .row-list'));
+               var deleteItemCount = 0;
                for (var i = 0; i < items.length; i++) {
                    var item = items[i];
                    if (angular.element(item.querySelectorAll('input')) && angular.element(item.querySelectorAll('input'))[0] &&
                        angular.element(item.querySelectorAll('input'))[0].type == "checkbox" && angular.element(item.querySelectorAll('input'))[0].checked == true) {
-                           var itemText = angular.element(item.querySelectorAll(".list-elem-text"))[0].textContent;
-
-                           scope[inTypeList + 'Items']["item"] = scope[inTypeList + 'Items']["item"] || [];
-                           if (scope[inTypeList + 'Items']["item"].indexOf(itemText) != -1) {
-                               scope[inTypeList + 'Items']["item"].splice(scope[inTypeList + 'Items']["item"].indexOf(itemText), 1);
-                           }
-
-                           scope[toTypeList + 'Items']["item"] = scope[toTypeList + 'Items']["item"] || [];
-                           scope[toTypeList + 'Items']["item"].push(itemText);
+                           scope[toTypeList + 'Items'].push(scope[inTypeList + 'Items'][i - deleteItemCount]);
+                           scope[inTypeList + 'Items'].splice(i - deleteItemCount, 1);
+                           deleteItemCount++;
                    }
                }
            };
@@ -106,9 +129,10 @@ app.directive('todoList', [function(){
                scope.models.lists[typeList].splice(idx, 1);
            };
 
-            scope.$watch('models', function (model) {
-                scope.modelAsJson = angular.toJson(model, true);
-            }, true);
+
+           scope.$watch('models', function (model) {
+               scope.modelAsJson = angular.toJson(model, true);
+           }, true);
         }
     }
 }]);
