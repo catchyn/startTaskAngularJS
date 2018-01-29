@@ -28,14 +28,25 @@
         <h2>Список продуктов</h2>
         <div>
             <todo-list
+                id="needBuyLists"
                 init-items="items"
                 init-value="sysname"
+                method="any_method"
+                service="any_service"
                 init-text="text"
                 init-title="Нужно купить"
                 result-title="Куплено"
-                multi-select>
+                multi-select
+                value="result">
             </todo-list>
         </div>
+        <br>
+        <br>
+        <br>
+        <blockquote>
+            <h3>Объект в итоговом списке:</h3>
+            <code>{{result}}</code>
+        </blockquote>
 
     </div>
 </body>

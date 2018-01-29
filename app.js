@@ -28,9 +28,11 @@ app.controller('MainCtrl', ['$scope', function ($scope) {
             sysname: 'long'
         }
     ];
+
+    $scope.result = [];
 }]);
 
-app.directive('todoList', [function(){
+app.directive('todoList', ['$http', function($http){
     return {
         restrict: 'E',
         scope: {
@@ -39,7 +41,10 @@ app.directive('todoList', [function(){
             initValue: '@',
             initText: '@',
             resultTitle: '@',
-            multiSelect: '@'
+            multiSelect: '@',
+            method: '@',
+            service: '@',
+            resultItems: '=value'
         },
         replace: false,
         templateUrl: 'list.html',
@@ -49,6 +54,35 @@ app.directive('todoList', [function(){
            scope.initCbShow = false;
            scope.resultCbShow = false;
            scope.resultItems = [];
+
+           if (!!scope["method"] != false && !!scope["service"] != false) {
+               $http({method: 'GET', url:'db/db.json'}).then(function (result) {
+                   if (result && result.data instanceof Array) {
+                       scope.initItems = result.data;
+                   } else {
+                       scope.initItems = [];
+                       alert("Error: Format data not correct");
+                   }
+                   scope.models = {
+                       selected: null,
+                       lists: {
+                           'init': scope.initItems,
+                           'result': scope.resultItems
+                       }
+                   };
+               }, function (result) {
+                   scope.initItems = [];
+                   scope.models = {
+                       selected: null,
+                       lists: {
+                           'init': scope.initItems,
+                           'result': scope.resultItems
+                       }
+                   };
+                   alert("Error: No data returned");
+               });
+           }
+
 
            //TODO: Сделать проверку на тип данных
            var formObj = function(list) {

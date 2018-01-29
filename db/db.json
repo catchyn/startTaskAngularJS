@@ -1,0 +1,27 @@
+[
+    {
+      "text": "Батон",
+      "num": 2,
+      "sysname": "bread"
+    },
+    {
+      "text": "Зефир",
+      "num": 1,
+      "sysname": "chefir"
+    },
+    {
+      "text": "Апельсин",
+      "num": 1,
+      "sysname": "Notapple"
+    },
+    {
+      "text": "Хлороформ",
+      "num": 2,
+      "sysname": "Chlor"
+    },
+    {
+      "text": "Очень длинное название очень длинное название чень длинное название",
+      "num": 1,
+      "sysname": "long"
+    }
+]
