@@ -57,8 +57,8 @@ app.directive('todoList', ['$http', function($http){
 
            if (!!scope["method"] != false && !!scope["service"] != false) {
                $http({method: 'GET', url:'db/db.json'}).then(function (result) {
-                   if (result && result.data instanceof Array) {
-                       scope.initItems = result.data;
+                   if (result && result.data instanceof Object) {
+                       scope.initItems = result.data["list"];
                    } else {
                        scope.initItems = [];
                        alert("Error: Format data not correct");
