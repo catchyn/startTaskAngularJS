@@ -12,7 +12,7 @@
             <h4>
                 {{initTitle}}
             </h4>
-            <div ng-if="multiSelect == 'true'" ng-class="{open: open, 'btn-group': true}"  ng-click='open=!open'>
+            <div ng-if="multiSelect != undefined" ng-class="{open: open, 'btn-group': true}"  ng-click='open=!open'>
                 <button ng-class="{'btn btn-primary dropdown-toggle': true}" data-toggle="dropdown">
                     <span ng-class="{'caret':true}"></span>
                 </button>
@@ -46,7 +46,7 @@
             <h4>
                 {{resultTitle}}
             </h4>
-            <div ng-if="multiSelect == 'true'" ng-class="{open: open2, 'btn-group': true}" ng-click='open2=!open2'>
+            <div ng-if="multiSelect != undefined" ng-class="{open: open2, 'btn-group': true}" ng-click='open2=!open2'>
                 <button ng-class="{'btn btn-success dropdown-toggle': true}" data-toggle="dropdown">
                     <span ng-class="{'caret':true}"></span>
                 </button>
